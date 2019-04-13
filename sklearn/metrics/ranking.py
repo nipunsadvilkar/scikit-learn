@@ -613,6 +613,10 @@ def roc_curve(y_true, y_score, pos_label=None, sample_weight=None,
     array([1.8 , 0.8 , 0.4 , 0.35, 0.1 ])
 
     """
+    if len(np.unique(y_true)) != 2:
+            raise ValueError("Only one class present in y_true. "
+                             "ROC can not be computed in that case.")
+
     fps, tps, thresholds = _binary_clf_curve(
         y_true, y_score, pos_label=pos_label, sample_weight=sample_weight)
 
